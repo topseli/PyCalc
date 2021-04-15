@@ -35,8 +35,56 @@ class CalcView(QtWidgets.QWidget):
         msg.exec_()
 
     @pyqtSlot()
-    def on_num0_button_clicked(self):
+    def on_button_0_clicked(self):
         self.calculation_input.setText(self.calculation_input.text() + "0")
+
+    @pyqtSlot()
+    def on_button_1_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "1")
+
+    @pyqtSlot()
+    def on_button_2_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "2")
+
+    @pyqtSlot()
+    def on_button_3_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "3")
+
+    @pyqtSlot()
+    def on_button_4_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "4")
+
+    @pyqtSlot()
+    def on_button_5_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "5")
+
+    @pyqtSlot()
+    def on_button_6_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "6")
+
+    @pyqtSlot()
+    def on_button_7_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "7")
+
+    @pyqtSlot()
+    def on_button_8_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "8")
+
+    @pyqtSlot()
+    def on_button_9_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "9")
+
+    @pyqtSlot()
+    def on_button_dot_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + ".")
+
+    @pyqtSlot()
+    def on_button_plus_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "+")
+
+    @pyqtSlot()
+    def on_button_minus_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "-")
 
     @pyqtSlot()
     def on_equals_button_clicked(self):
