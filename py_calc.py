@@ -9,7 +9,7 @@ import logging
 from PyQt5 import QtWidgets, uic
 import calc_view
 import plot_view
-version = "0.1"
+version = "0.2"
 
 
 class PyCalc(QtWidgets.QWidget):
