@@ -38,27 +38,9 @@ class PyCalc(QtWidgets.QWidget):
         self.plot_widget.exit_button.clicked.connect(
             self.on_exit_button_clicked)
 
-        # Connect signals
-        self.calc_widget.equals_signal.connect(
-            self.on_equals_clicked)
-
     def on_exit_button_clicked(self):
         logging.info("Exiting")
         sys.exit(0)
-
-    def on_equals_clicked(self, calculation):
-        if calculation.count("Error") or calculation.count("=") != 0 or len(calculation) < 1:
-            calculation = ""
-            self.calc_widget.calculation_input.setText(calculation)
-            logging.info("No calculation")
-        else:
-            try:
-                result = calculation + "=" + str(eval(calculation))
-                self.calc_widget.calculation_input.setText(result)
-                logging.info(result)
-            except Exception as e:
-                self.calc_widget.calculation_input.setText("Error")
-                logging.info(e)
 
 
 def run():

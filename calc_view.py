@@ -16,8 +16,6 @@ from PyQt5.QtWidgets import QMessageBox
 
 class CalcView(QtWidgets.QWidget):
 
-    equals_signal = pyqtSignal(str)
-
     def __init__(self):
         super(CalcView, self).__init__()
         self.init_ui()
