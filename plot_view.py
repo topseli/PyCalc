@@ -14,6 +14,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 # Import for eval function
 from numpy import linspace, sqrt, sin, cos, tan
+
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from matplotlib.figure import Figure
 
@@ -26,6 +27,7 @@ class PlotCanvas(FigureCanvasQTAgg):
         super(PlotCanvas, self).__init__(fig)
 
     def plot(self, equation):
+        # NOTE You can modify the linspace to change the plotting range and precision.
         x = linspace(-5, 5, 100)
         y = eval(equation)
         self.axes.plot(x, y)
@@ -45,11 +47,11 @@ class PlotView(QtWidgets.QWidget):
         self.canvas = PlotCanvas(self, width=20, height=16, dpi=100)
         toolbar = NavigationToolbar2QT(self.canvas, self)
         self.grid_layout = self.layout()
-        self.grid_layout.addWidget(toolbar, 3, 0, 1, 3)
-        self.grid_layout.addWidget(self.canvas, 4, 0, 1, 3)
+        self.grid_layout.addWidget(toolbar, 3, 0, 1, 5)
+        self.grid_layout.addWidget(self.canvas, 4, 0, 1, 5)
 
     def show_warning(self, e):
-        self.equation_input.setText("Error")
+        self.input_equation.setText("Error")
         logging.info(e)
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
@@ -60,8 +62,8 @@ class PlotView(QtWidgets.QWidget):
         msg.exec_()
 
     @pyqtSlot()
-    def on_plot_button_clicked(self):
-        equation = self.equation_input.text()
+    def on_button_plot_clicked(self):
+        equation = self.input_equation.text()
         try:
             self.canvas.plot(equation)
         except Exception as e:
@@ -71,7 +73,7 @@ class PlotView(QtWidgets.QWidget):
 def run():
     APP = QtWidgets.QApplication(sys.argv)
     APP_WINDOW = PlotView()
-    APP_WINDOW.exit_button.clicked.connect(sys.exit)
+    APP_WINDOW.button_exit.clicked.connect(sys.exit)
     APP_WINDOW.show()
     APP.exec_()
 

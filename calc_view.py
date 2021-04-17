@@ -7,11 +7,13 @@ __license__ = "0BSD"
 import os
 import sys
 import logging
-from math import sqrt, sin, cos, tan
 
 from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import pyqtSignal, pyqtSlot
+from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMessageBox
+
+# Import for eval function
+from math import sqrt, sin, cos, tan
 
 
 class CalcView(QtWidgets.QWidget):
@@ -25,7 +27,7 @@ class CalcView(QtWidgets.QWidget):
         uic.loadUi(path, self)
 
     def show_warning(self, e):
-        self.calculation_input.setText("Error")
+        self.input_calculation.setText("Error")
         logging.info(e)
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
@@ -37,79 +39,79 @@ class CalcView(QtWidgets.QWidget):
 
     @pyqtSlot()
     def on_button_0_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "0")
+        self.input_calculation.setText(self.input_calculation.text() + "0")
 
     @pyqtSlot()
     def on_button_1_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "1")
+        self.input_calculation.setText(self.input_calculation.text() + "1")
 
     @pyqtSlot()
     def on_button_2_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "2")
+        self.input_calculation.setText(self.input_calculation.text() + "2")
 
     @pyqtSlot()
     def on_button_3_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "3")
+        self.input_calculation.setText(self.input_calculation.text() + "3")
 
     @pyqtSlot()
     def on_button_4_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "4")
+        self.input_calculation.setText(self.input_calculation.text() + "4")
 
     @pyqtSlot()
     def on_button_5_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "5")
+        self.input_calculation.setText(self.input_calculation.text() + "5")
 
     @pyqtSlot()
     def on_button_6_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "6")
+        self.input_calculation.setText(self.input_calculation.text() + "6")
 
     @pyqtSlot()
     def on_button_7_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "7")
+        self.input_calculation.setText(self.input_calculation.text() + "7")
 
     @pyqtSlot()
     def on_button_8_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "8")
+        self.input_calculation.setText(self.input_calculation.text() + "8")
 
     @pyqtSlot()
     def on_button_9_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "9")
+        self.input_calculation.setText(self.input_calculation.text() + "9")
 
     @pyqtSlot()
     def on_button_dot_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + ".")
+        self.input_calculation.setText(self.input_calculation.text() + ".")
 
     @pyqtSlot()
     def on_button_plus_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "+")
+        self.input_calculation.setText(self.input_calculation.text() + "+")
 
     @pyqtSlot()
     def on_button_minus_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "-")
+        self.input_calculation.setText(self.input_calculation.text() + "-")
 
     @pyqtSlot()
     def on_button_multiply_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "*")
+        self.input_calculation.setText(self.input_calculation.text() + "*")
 
     @pyqtSlot()
     def on_button_divide_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "/")
+        self.input_calculation.setText(self.input_calculation.text() + "/")
 
     @pyqtSlot()
     def on_button_modulo_clicked(self):
-        self.calculation_input.setText(self.calculation_input.text() + "%")
+        self.input_calculation.setText(self.input_calculation.text() + "%")
 
     @pyqtSlot()
-    def on_equals_button_clicked(self):
-        calculation = self.calculation_input.text()
+    def on_button_equals_clicked(self):
+        calculation = self.input_calculation.text()
         if calculation.count("Error") or calculation.count("=") != 0 or len(calculation) < 1:
             calculation = ""
-            self.calculation_input.setText(calculation)
+            self.input_calculation.setText(calculation)
             logging.info("No calculation")
         else:
             try:
                 result = calculation + "=" + str(eval(calculation))
-                self.calculation_input.setText(result)
+                self.input_calculation.setText(result)
                 logging.info(result)
             except Exception as e:
                 self.show_warning(e)
@@ -118,7 +120,7 @@ class CalcView(QtWidgets.QWidget):
 def run():
     APP = QtWidgets.QApplication(sys.argv)
     APP_WINDOW = CalcView()
-    APP_WINDOW.exit_button.clicked.connect(sys.exit)
+    APP_WINDOW.button_exit.clicked.connect(sys.exit)
     APP_WINDOW.show()
     APP.exec_()
 
@@ -126,13 +128,13 @@ def run():
 if __name__ == '__main__':
 
     @pyqtSlot()
-    def on_equals_button_clicked(self):
-        calculation = self.calculation_input.text()
+    def on_button_equals_clicked(self):
+        calculation = self.input_calculation.text()
 
         if calculation.count("=") != 0 or len(calculation) < 1:
             calculation = ""
-            self.calculation_input.setText(calculation)
+            self.input_calculation.setText(calculation)
         else:
-            self.calculation_input.setText(calculation + "=" + str(eval(calculation)))
+            self.input_calculation.setText(calculation + "=" + str(eval(calculation)))
 
     run()

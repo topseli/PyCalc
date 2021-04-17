@@ -9,7 +9,7 @@ import logging
 from PyQt5 import QtWidgets, uic
 import calc_view
 import plot_view
-version = "0.2"
+version = "0.5"
 
 
 class PyCalc(QtWidgets.QWidget):
@@ -32,13 +32,13 @@ class PyCalc(QtWidgets.QWidget):
         self.tab_widget.addTab(self.calc_widget, "Calculate")
         self.tab_widget.addTab(self.plot_widget, "Plot")
 
-        # Connect exit_buttons
-        self.calc_widget.exit_button.clicked.connect(
-            self.on_exit_button_clicked)
-        self.plot_widget.exit_button.clicked.connect(
-            self.on_exit_button_clicked)
+        # Connect exit buttons
+        self.calc_widget.button_exit.clicked.connect(
+            self.on_button_exit_clicked)
+        self.plot_widget.button_exit.clicked.connect(
+            self.on_button_exit_clicked)
 
-    def on_exit_button_clicked(self):
+    def on_button_exit_clicked(self):
         logging.info("Exiting")
         sys.exit(0)
 
