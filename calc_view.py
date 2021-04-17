@@ -6,6 +6,8 @@ __license__ = "0BSD"
 
 import os
 import sys
+import logging
+from math import sqrt, sin, cos, tan
 
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import pyqtSignal, pyqtSlot
@@ -25,11 +27,12 @@ class CalcView(QtWidgets.QWidget):
         uic.loadUi(path, self)
 
     def show_warning(self, e):
+        self.calculation_input.setText("Error")
+        logging.info(e)
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
-        # TODO define better error message
-        msg.setText("Some error")
-        msg.setWindowTitle("ERROR")
+        msg.setWindowTitle("Warning")
+        msg.setText("An error occured!")
         msg.setDetailedText(str(e))
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec_()
@@ -87,9 +90,31 @@ class CalcView(QtWidgets.QWidget):
         self.calculation_input.setText(self.calculation_input.text() + "-")
 
     @pyqtSlot()
+    def on_button_multiply_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "*")
+
+    @pyqtSlot()
+    def on_button_divide_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "/")
+
+    @pyqtSlot()
+    def on_button_modulo_clicked(self):
+        self.calculation_input.setText(self.calculation_input.text() + "%")
+
+    @pyqtSlot()
     def on_equals_button_clicked(self):
         calculation = self.calculation_input.text()
-        self.equals_signal.emit(calculation)
+        if calculation.count("Error") or calculation.count("=") != 0 or len(calculation) < 1:
+            calculation = ""
+            self.calculation_input.setText(calculation)
+            logging.info("No calculation")
+        else:
+            try:
+                result = calculation + "=" + str(eval(calculation))
+                self.calculation_input.setText(result)
+                logging.info(result)
+            except Exception as e:
+                self.show_warning(e)
 
 
 def run():

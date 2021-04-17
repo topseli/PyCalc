@@ -6,12 +6,14 @@ __license__ = "0BSD"
 
 import os
 import sys
+import logging
 
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMessageBox
 
-import numpy
+# Import for eval function
+from numpy import linspace, sqrt, sin, cos, tan
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from matplotlib.figure import Figure
 
@@ -24,7 +26,7 @@ class PlotCanvas(FigureCanvasQTAgg):
         super(PlotCanvas, self).__init__(fig)
 
     def plot(self, equation):
-        x = numpy.linspace(0, 5, 100)
+        x = linspace(-5, 5, 100)
         y = eval(equation)
         self.axes.plot(x, y)
         self.draw()
@@ -47,11 +49,12 @@ class PlotView(QtWidgets.QWidget):
         self.grid_layout.addWidget(self.canvas, 4, 0, 1, 3)
 
     def show_warning(self, e):
+        self.equation_input.setText("Error")
+        logging.info(e)
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Warning)
-        # TODO define better error message
-        msg.setText("Some error")
-        msg.setWindowTitle("ERROR")
+        msg.setWindowTitle("Warning")
+        msg.setText("An error occured!")
         msg.setDetailedText(str(e))
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec_()
@@ -59,7 +62,10 @@ class PlotView(QtWidgets.QWidget):
     @pyqtSlot()
     def on_plot_button_clicked(self):
         equation = self.equation_input.text()
-        self.canvas.plot(equation)
+        try:
+            self.canvas.plot(equation)
+        except Exception as e:
+            self.show_warning(e)
 
 
 def run():
