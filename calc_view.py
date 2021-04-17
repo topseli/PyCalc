@@ -39,74 +39,94 @@ class CalcView(QtWidgets.QWidget):
 
     @pyqtSlot()
     def on_button_0_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "0")
+        self.input_calculation.insert("0")
 
     @pyqtSlot()
     def on_button_1_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "1")
+        self.input_calculation.insert("1")
 
     @pyqtSlot()
     def on_button_2_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "2")
+        self.input_calculation.insert("2")
 
     @pyqtSlot()
     def on_button_3_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "3")
+        self.input_calculation.insert("3")
 
     @pyqtSlot()
     def on_button_4_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "4")
+        self.input_calculation.insert("4")
 
     @pyqtSlot()
     def on_button_5_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "5")
+        self.input_calculation.insert("5")
 
     @pyqtSlot()
     def on_button_6_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "6")
+        self.input_calculation.insert("6")
 
     @pyqtSlot()
     def on_button_7_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "7")
+        self.input_calculation.insert("7")
 
     @pyqtSlot()
     def on_button_8_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "8")
+        self.input_calculation.insert("8")
 
     @pyqtSlot()
     def on_button_9_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "9")
+        self.input_calculation.insert("9")
 
     @pyqtSlot()
     def on_button_dot_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + ".")
+        self.input_calculation.insert(".")
 
     @pyqtSlot()
     def on_button_plus_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "+")
+        self.input_calculation.insert("+")
 
     @pyqtSlot()
     def on_button_minus_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "-")
+        self.input_calculation.insert("-")
 
     @pyqtSlot()
     def on_button_multiply_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "*")
+        self.input_calculation.insert("*")
 
     @pyqtSlot()
     def on_button_divide_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "/")
+        self.input_calculation.insert("/")
 
     @pyqtSlot()
     def on_button_modulo_clicked(self):
-        self.input_calculation.setText(self.input_calculation.text() + "%")
+        self.input_calculation.insert("%")
+
+    @pyqtSlot()
+    def on_button_sin_clicked(self):
+        self.input_calculation.insert("sin()")
+
+    @pyqtSlot()
+    def on_button_cos_clicked(self):
+        self.input_calculation.insert("cos()")
+
+    @pyqtSlot()
+    def on_button_tan_clicked(self):
+        self.input_calculation.insert("tan()")
+
+    @pyqtSlot()
+    def on_button_sqrt_clicked(self):
+        self.input_calculation.insert("sqrt()")
+
+
+    @pyqtSlot()
+    def on_button_clear_clicked(self):
+        self.input_calculation.clear()
 
     @pyqtSlot()
     def on_button_equals_clicked(self):
         calculation = self.input_calculation.text()
         if calculation.count("Error") or calculation.count("=") != 0 or len(calculation) < 1:
-            calculation = ""
-            self.input_calculation.setText(calculation)
+            self.input_calculation.clear()
             logging.info("No calculation")
         else:
             try:
@@ -132,8 +152,7 @@ if __name__ == '__main__':
         calculation = self.input_calculation.text()
 
         if calculation.count("=") != 0 or len(calculation) < 1:
-            calculation = ""
-            self.input_calculation.setText(calculation)
+            self.input_calculation.clear()
         else:
             self.input_calculation.setText(calculation + "=" + str(eval(calculation)))
 

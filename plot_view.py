@@ -26,6 +26,10 @@ class PlotCanvas(FigureCanvasQTAgg):
         self.axes = fig.add_subplot(111)
         super(PlotCanvas, self).__init__(fig)
 
+    def clear(self):
+        self.axes.clear()
+        self.draw()
+
     def plot(self, equation):
         # NOTE You can modify the linspace to change the plotting range and precision.
         x = linspace(-5, 5, 100)
@@ -60,6 +64,11 @@ class PlotView(QtWidgets.QWidget):
         msg.setDetailedText(str(e))
         msg.setStandardButtons(QMessageBox.Ok)
         msg.exec_()
+
+    @pyqtSlot()
+    def on_button_clear_clicked(self):
+        self.canvas.clear()
+        self.input_equation.clear()
 
     @pyqtSlot()
     def on_button_plot_clicked(self):
