@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" calc_view.py - presenter for the default calculator"""
+""" plot_view.py - presenter for the graph plotter"""
 __author__ = "topseli"
 __license__ = "0BSD"
 
