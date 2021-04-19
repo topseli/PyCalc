@@ -1,4 +1,4 @@
-# PyCalc - A simple calculator wity pyqt
+# PyCalc - A simple calculator with pyqt
 
 ## Requirements
 
