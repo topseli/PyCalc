@@ -13,7 +13,7 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMessageBox
 
 # Import for eval function
-from math import sqrt, sin, cos, tan
+from math import sqrt, sin, cos, tan # noqa F401
 
 
 class CalcView(QtWidgets.QWidget):
@@ -116,7 +116,6 @@ class CalcView(QtWidgets.QWidget):
     @pyqtSlot()
     def on_button_sqrt_clicked(self):
         self.input_calculation.insert("sqrt()")
-
 
     @pyqtSlot()
     def on_button_clear_clicked(self):

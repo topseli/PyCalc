@@ -13,7 +13,7 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMessageBox
 
 # Import for eval function
-from numpy import linspace, sqrt, sin, cos, tan
+from numpy import linspace, sqrt, sin, cos, tan # noqa F401
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg, NavigationToolbar2QT
 from matplotlib.figure import Figure
